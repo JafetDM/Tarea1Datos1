@@ -16,6 +16,33 @@ namespace Server
 
         Socket s_Server;
         Socket s_Cliente; //objetos de cliente y servidor usando socket
+        public Server(string ip, int port) //metodo que contiene ip por la cual va a escuchar y el puerto a identificar
+        {
+            host = Dns.GetHostByName(ip); //DNS Domain Name System resuelve los "nombres" de los host. GetHostByName obtiene el nombre local
+            ipAddr = host.AddressList[0]; //devuelve lista de direcciones IP asociadas con el host
+            endPoint = new IPEndPoint(ipAddr, port); //define el endpoint
 
+            s_Server = new Socket(ipAddr.AddressFamily, SocketType.Stream, ProtocolType.Tcp); //
+            s_Server.Bind(endPoint); //recibe un endpoint para escuchar
+            s_Server.Listen(10); //cuantas conexiones van a haber pendientes antes de que empiece a rechazar
+
+        }
+
+        public void Start() //metodo que inicia el server
+        {
+            byte[] buffer;
+            string mensaje; //variable string para los mensajes
+            s_Cliente = s_Server.Accept(); //inicializar el cliente para que el servidor acepte al cliente
+
+            while (true)
+            {
+                buffer = new byte[1024]; //máximo de bytes a recibir
+                s_Cliente.Receive(buffer); //recibir un buffer de un array de bytes
+                mensaje = Encoding.ASCII.GetString(buffer); //Encoding  proporciona métodos para convertir datos
+                                                            //ASCCI imprime ciertos caracteres, GetString convirttr los bytes en cadena de texto
+                Console.WriteLine("Se recibió el mensaje: " + mensaje); //escribe en la consola el mensaje del cliente
+            }
+            
+        }
     }
 }
