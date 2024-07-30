@@ -1,0 +1,28 @@
+using Microsoft.VisualBasic;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Cliente
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Cliente c = new Cliente("localhost", 4404); //crea la instancia del cliente
+            string msg; //mensaje a enviar
+            c.Start(); //inicia al cliente
+
+            while (true)
+
+
+            {
+                Console.Write("Escriba su mensaje: ");
+                msg = Console.ReadLine();
+                c.Enviar(msg);
+                Console.ReadKey();
+            }
+        }
+    }
