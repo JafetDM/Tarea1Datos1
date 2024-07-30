@@ -13,7 +13,9 @@ namespace Cliente
         {
             Cliente c = new Cliente("localhost", 4404); //crea la instancia del cliente
             string msg; //mensaje a enviar
-            c.Start(); //inicia al cliente
+            c.Start(); //inicia al cliente.
+
+            
 
             while (true)
 
@@ -26,3 +28,4 @@ namespace Cliente
             }
         }
     }
+}
