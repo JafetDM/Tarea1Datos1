@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +14,7 @@ namespace Cliente
         IPAddress ipAddr; //atributo para escuchar una dirección IP
         IPEndPoint endPoint; // endpoint de la red de comunicación (definido por IP y puerto)
 
-       
+
         Socket s_Cliente; //atributo de cliente usando socket
 
         public Cliente(string ip, int port) //constructor que contiene ip por la cual va a conectar y el puerto a identificar
@@ -24,8 +24,8 @@ namespace Cliente
             endPoint = new IPEndPoint(ipAddr, port); //define el endpoint
 
             s_Cliente = new Socket(ipAddr.AddressFamily, SocketType.Stream, ProtocolType.Tcp); //se define el tipo de socket
-            
-           
+
+
 
         }
 
