@@ -11,11 +11,14 @@ namespace Cliente
     {
         static void Main(string[] args)
         {
-            Cliente c = new Cliente("localhost", 4404); //crea la instancia del cliente
+            Console.Write("Ingrese un puerto válido");
+            string port = Console.ReadLine();
+            int puerto = int.Parse(port); //convierte la entrada en un int 
+            Cliente c = new Cliente("localhost", puerto); //crea la instancia del cliente
             string msg; //mensaje a enviar
             c.Start(); //inicia al cliente.
 
-            
+
 
             while (true)
 
