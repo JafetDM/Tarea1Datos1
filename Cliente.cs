@@ -35,12 +35,21 @@ namespace Cliente
 
         }
 
-        public void Enviar(string msg)
+        public void Enviar (string msg)
         {
             byte[] byteMsg = Encoding.ASCII.GetBytes(msg); //bytes a enviar
             s_Cliente.Send(byteMsg);
-            Console.WriteLine("Mensaje enviado:" + msg);
+            Console.WriteLine("Mensaje a enviar: " + msg);
         }
+
+        public void EnviarNombre(string nombre)
+        {
+            byte[] byteMsg = Encoding.ASCII.GetBytes(nombre); //bytes a enviar
+            s_Cliente.Send(byteMsg);
+            Console.WriteLine("Usuario emisor: " + nombre);
+        }
+
     }
+
 
 }
