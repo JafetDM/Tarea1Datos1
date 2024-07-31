@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets; //librerias de .Net para uso de sockets
+using System.Threading; //para permitir que mas clientes se conecten
 
 namespace Server
 {
@@ -30,19 +31,35 @@ namespace Server
 
         public void Start() //metodo que inicia el server
         {
+            Thread t;
+            while (true)
+            {
+                s_Cliente = s_Server.Accept(); //inicializar el cliente para que el servidor acepte al cliente
+                t = new Thread(clientConnect); //iniciar un hilo de clientes aceptables
+                t.Start(s_Cliente); //iniciarlo
+            }
+
+           
+
+
+        }
+
+        public void clientConnect(object s) //metodo que recibe mensajes de clientes
+        {
+            Socket s_Cliente = (Socket)s; //crea un socket
             byte[] buffer;
             string mensaje; //variable string para los mensajes
-            s_Cliente = s_Server.Accept(); //inicializar el cliente para que el servidor acepte al cliente
+            
 
             while (true)
             {
+                Console.Write("Esperando...");
                 buffer = new byte[1024]; //máximo de bytes a recibir
                 s_Cliente.Receive(buffer); //recibir un buffer de un array de bytes
                 mensaje = Encoding.ASCII.GetString(buffer); //Encoding  proporciona métodos para convertir datos
                                                             //ASCCI imprime ciertos caracteres, GetString convirttr los bytes en cadena de texto
                 Console.WriteLine("Se recibió el mensaje: " + mensaje); //escribe en la consola el mensaje del cliente
             }
-            
         }
     }
 }
