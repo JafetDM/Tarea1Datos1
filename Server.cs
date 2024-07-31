@@ -48,8 +48,12 @@ namespace Server
         {
             Socket s_Cliente = (Socket)s; //crea un socket
             byte[] buffer;
+            byte[] buffer2;
+            string nombre;
             string mensaje; //variable string para los mensajes
+
             
+
 
             while (true)
             {
@@ -58,7 +62,10 @@ namespace Server
                 s_Cliente.Receive(buffer); //recibir un buffer de un array de bytes
                 mensaje = Encoding.ASCII.GetString(buffer); //Encoding  proporciona métodos para convertir datos
                                                             //ASCCI imprime ciertos caracteres, GetString convirttr los bytes en cadena de texto
-                Console.WriteLine("Se recibió el mensaje: " + mensaje); //escribe en la consola el mensaje del cliente
+                buffer2 = new byte[1024];
+                s_Cliente.Receive(buffer2);
+                nombre = Encoding.ASCII.GetString(buffer2);
+                Console.WriteLine("Se recibió un  mensaje de: "+nombre+": " + mensaje); //escribe en la consola el mensaje del cliente
             }
         }
     }
