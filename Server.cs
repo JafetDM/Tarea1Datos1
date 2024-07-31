@@ -51,6 +51,7 @@ namespace Server
             byte[] buffer2;
             string nombre;
             string mensaje; //variable string para los mensajes
+            int endIndex; //variable entera para manejar donde termine el mensaje
 
             
 
@@ -65,6 +66,9 @@ namespace Server
                 buffer2 = new byte[1024];
                 s_Cliente.Receive(buffer2);
                 nombre = Encoding.ASCII.GetString(buffer2);
+                endIndex = nombre.IndexOf("/0"); //metodo que devuelve el primer caracter "vacio"
+                if (endIndex >0)
+                    nombre = nombre.Substring(0, endIndex); //metodo que elimina la cadena de caracteres innecesarias 
                 Console.WriteLine("Se recibió un  mensaje de: "+nombre+": " + mensaje); //escribe en la consola el mensaje del cliente
             }
         }
